@@ -33,10 +33,6 @@ body {
   transform-style: preserve-3d;
   transform: translateX(-50%) translateY(-50%);
 
-  * {
-    transform-style: preserve-3d;
-  }
-
   .board {
     position: absolute;
     border-radius: 10px;
