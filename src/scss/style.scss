@@ -17,28 +17,10 @@ body {
   font-size: 16px;
 }
 
-.old-browser {
-  display: none;
-  display: block \9
-;
-  font-size: 40px;
-  text-align: center;
-
-  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-    display: block;
-  }
-}
-
 .container {
   position: relative;
   perspective: 1000px;
   height: 100%;
-
-  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-    display: none;
-  }
-  display: none \9
-;
 }
 
 /**
@@ -170,12 +152,32 @@ body {
 /**
  * Sizes
  */
+.old-browser {
+  display: none;
+  display: block \9
+;
+  font-size: 40px;
+  text-align: center;
+
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    display: block;
+  }
+}
+
 .container {
   display: none;
 
   @include media(">=900px", "height>=600px") {
     display: block;
   }
+  /**
+   * Ban IE
+   */
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    display: none;
+  }
+  display: none \9
+;
 }
 
 .notebook {
