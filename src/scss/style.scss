@@ -188,12 +188,12 @@ body {
   .board, .screen {
     width: 550px;
     height: 310px;
-    left: calc(50% - 275px);
+    left: 175px;
 
     @include media(">=1280px", "height>=800px") {
       width: 700px;
       height: 394px;
-      left: calc(50% - 350px);
+      left: 290px;
     }
   }
 
@@ -401,7 +401,11 @@ $animationTime: 4s;
 
 @keyframes open {
   0% {
-    transform: rotateX(-120deg);
+    transform: rotateX(-120deg) translateY(-6px);
+  }
+
+  5% {
+    transform: rotateX(-100deg) translateY(0);
   }
 
   30%, 100% {
@@ -410,7 +414,7 @@ $animationTime: 4s;
 }
 
 @keyframes hide-loading-screen {
-  0%, 70% {
+  0%, 60% {
     left: 0;
   }
 
@@ -425,12 +429,12 @@ $animationTime: 4s;
     opacity: 1;
   }
 
-  65% {
+  55% {
     transform: rotateZ(359deg);
     opacity: 1;
   }
 
-  70%, 100% {
+  60%, 100% {
     transform: rotateZ(359deg);
     opacity: 0;
   }
