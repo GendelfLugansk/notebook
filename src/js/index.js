@@ -1,4 +1,6 @@
 $(function () {
+    var keyboardActiveInput = $('.screen-front input:first');
+
     $('.screen').click(function () {
         var notebook = $('.notebook');
         if (notebook.hasClass('close')) {
@@ -15,6 +17,11 @@ $(function () {
         }
     });
     $('.board button').click(function () {
-        $('.password-input').val($('.password-input').val() + $(this).html());
+        if (keyboardActiveInput && keyboardActiveInput.val) {
+            keyboardActiveInput.val(keyboardActiveInput.val() + $(this).html());
+        }
     });
+    $('.screen-front input').focus(function () {
+        keyboardActiveInput = $(this);
+    })
 });
