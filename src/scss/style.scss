@@ -1,0 +1,484 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Slabo+27px&subset=cyrillic,cyrillic-ext');
+@import "include-media";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background: #555;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+.old-browser {
+  display: none;
+  display: block \9
+;
+  font-size: 40px;
+  text-align: center;
+
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    display: block;
+  }
+}
+
+.container {
+  position: relative;
+  perspective: 1000px;
+  height: 100%;
+
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    display: none;
+  }
+  display: none \9
+;
+}
+
+/**
+ * Notebook
+ */
+.notebook {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  transform: translateX(-50%) translateY(-50%);
+
+  * {
+    transform-style: preserve-3d;
+  }
+
+  .board {
+    position: absolute;
+    border-radius: 10px;
+    background: #333;
+    transform-origin: top left;
+    transform: rotateX(60deg);
+    box-sizing: border-box;
+    padding: 10px 5px;
+    border: 6px solid #222;
+    .system {
+      padding-bottom: 10px;
+      text-align: right;
+
+      a {
+        color: #fff;
+        font-size: 16px;
+        height: 30px;
+        line-height: 30px;
+      }
+    }
+    .row {
+      padding-bottom: 8px;
+      text-align: center;
+    }
+    button {
+      width: 40px;
+      height: 50px;
+      font-size: 25px;
+      background: #444;
+      border: none;
+      color: #fff;
+      &:hover,
+      &:focus {
+        background: #555;
+        cursor: pointer;
+        outline: none;
+      }
+    }
+  }
+
+  .screen {
+    position: absolute;
+    box-sizing: border-box;
+    transform-origin: bottom left;
+    transform: rotateX(-120deg) translateY(-6px);
+    transform-style: preserve-3d;
+
+    .screen-back {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #222;
+      transform: rotateX(180deg);
+      backface-visibility: hidden;
+      border-radius: 10px;
+      box-sizing: border-box;
+      cursor: pointer;
+      z-index: 1;
+
+      h1 {
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        color: #444;
+        font-family: 'Slabo 27px', serif;
+        font-size: 36px;
+
+        small {
+          display: block;
+          font-size: 0.5em;
+        }
+      }
+    }
+
+    .screen-front {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #059fff;
+      backface-visibility: hidden;
+      border: 6px solid #222;
+      border-radius: 10px;
+      box-sizing: border-box;
+      transform-style: preserve-3d;
+      overflow: hidden;
+    }
+  }
+
+  .joints {
+    position: absolute;
+    width: 100%;
+    > div {
+      height: 100%;
+      position: absolute;
+      border-radius: 2px;
+      box-sizing: border-box;
+      /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#222222+0,222222+40,252525+100 */
+      background: #222222; /* Old browsers */
+      background: -moz-linear-gradient(top, #222222 0%, #222222 40%, #252525 100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(top, #222222 0%, #222222 40%, #252525 100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to bottom, #222222 0%, #222222 40%, #252525 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#222222', endColorstr='#252525', GradientType=0); /* IE6-9 */
+    }
+  }
+}
+
+/**
+ * Sizes
+ */
+.container {
+  display: none;
+
+  @include media(">=900px", "height>=600px") {
+    display: block;
+  }
+}
+
+.notebook {
+  width: 900px;
+  height: 600px;
+
+  @include media(">=1280px", "height>=800px") {
+    width: 1280px;
+    height: 800px;
+  }
+
+  .board, .screen {
+    width: 550px;
+    height: 310px;
+    left: calc(50% - 275px);
+
+    @include media(">=1280px", "height>=800px") {
+      width: 700px;
+      height: 394px;
+      left: calc(50% - 350px);
+    }
+  }
+
+  .board {
+    top: 346px;
+
+    @include media(">=1280px", "height>=800px") {
+      top: 438px;
+
+      .system {
+        padding-right: 16px;
+      }
+
+      button {
+        width: 50px;
+      }
+    }
+  }
+
+  .screen {
+    bottom: 260px;
+
+    @include media(">=1280px", "height>=800px") {
+      bottom: 370px;
+    }
+  }
+
+  .joints {
+    top: 340px;
+    height: 6px;
+
+    @include media(">=1280px", "height>=800px") {
+      top: 430px;
+      height: 8px;
+    }
+
+    > div {
+      width: 50px;
+
+      @include media(">=1280px", "height>=800px") {
+        width: 70px;
+      }
+
+      &.left {
+        left: 200px;
+
+        @include media(">=1280px", "height>=800px") {
+          left: 320px;
+        }
+      }
+      &.right {
+        right: 200px;
+
+        @include media(">=1280px", "height>=800px") {
+          right: 320px;
+        }
+      }
+    }
+  }
+}
+
+.small-device {
+  font-size: 40px;
+  text-align: center;
+
+  @include media(">=900px", "height>=600px") {
+    display: none;
+  }
+}
+
+/**
+ * Content
+ */
+.notebook {
+  .screen {
+    .screen-front {
+
+      .loading-screen, .login-screen {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      .loading-screen {
+        background: #0079ff;
+
+        .spinner {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          color: #fff;
+        }
+      }
+
+      .login-screen {
+        background: #059fff;
+        color: #fff;
+
+        .login-form {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          text-align: center;
+          padding: 20px;
+          background: rgba(0, 0, 0, 0.1);
+          box-sizing: border-box;
+          width: 200px;
+
+          .row {
+            padding-bottom: 10px;
+
+            &.lock {
+              font-size: 30px;
+            }
+
+            &.action {
+              padding-top: 10px;
+            }
+
+            label {
+              display: block;
+              margin-bottom: 5px;
+            }
+
+            input {
+              border: none;
+              outline: none;
+              display: block;
+              width: 100%;
+              height: 20px;
+              line-height: 20px;
+              color: #000;
+            }
+
+            button {
+              display: block;
+              width: 100%;
+              background: none;
+              border: 1px solid #fff;
+              border-radius: 3px;
+              box-shadow: none;
+              outline: none;
+              font-size: 16px;
+              font-weight: bold;
+              height: 30px;
+              line-height: 30px;
+              color: #fff;
+              padding: 0;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Animations
+ */
+$animationTime: 4s;
+
+.notebook {
+  &.open {
+    .screen {
+      transform: rotateX(0deg) translateY(0);
+      animation: open $animationTime 1 linear;
+
+      .loading-screen {
+        left: -100%;
+        animation: hide-loading-screen $animationTime 1 linear;
+
+        .spinner {
+          i {
+            animation: spinner $animationTime 1 linear;
+          }
+        }
+      }
+
+      .login-screen {
+        .login-form {
+          animation: login-form $animationTime 1 linear;
+        }
+      }
+    }
+  }
+
+  &.close {
+    .screen {
+      transform: rotateX(-120deg) translateY(-6px);
+      animation: close $animationTime 1 linear;
+
+      .loading-screen {
+        left: 0;
+        animation: show-loading-screen $animationTime 1 linear;
+      }
+    }
+  }
+}
+
+@keyframes open {
+  0% {
+    transform: rotateX(-120deg);
+  }
+
+  30%, 100% {
+    transform: rotateX(0deg) translateY(0);
+  }
+}
+
+@keyframes hide-loading-screen {
+  0%, 70% {
+    left: 0;
+  }
+
+  90% {
+    left: -100%;
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotateZ(0deg);
+    opacity: 1;
+  }
+
+  65% {
+    transform: rotateZ(359deg);
+    opacity: 1;
+  }
+
+  70%, 100% {
+    transform: rotateZ(359deg);
+    opacity: 0;
+  }
+}
+
+@keyframes login-form {
+  0%, 90% {
+    top: 100%;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  100% {
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+}
+
+@keyframes close {
+  0% {
+    transform: rotateX(0deg);
+  }
+
+  30%, 100% {
+    transform: rotateX(-120deg) translateY(-6px);
+  }
+}
+
+@keyframes show-loading-screen {
+  0%, 99% {
+    left: -100%;
+  }
+
+  100% {
+    left: 0;
+  }
+}
+
+.fa-spin-3d {
+  animation: fa-spin-3d 2s infinite linear;
+}
+
+@keyframes fa-spin-3d {
+  0% {
+    transform: rotateZ(0deg);
+  }
+
+  100% {
+    transform: rotateZ(359deg);
+  }
+}
