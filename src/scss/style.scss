@@ -91,6 +91,7 @@ body {
       border-radius: 10px;
       box-sizing: border-box;
       cursor: pointer;
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
       z-index: 1;
 
       h1 {
@@ -118,7 +119,7 @@ body {
       width: 100%;
       background: #059fff;
       backface-visibility: hidden;
-      border: 6px solid #222;
+      border: 10px solid #222;
       border-radius: 10px;
       box-sizing: border-box;
       transform-style: preserve-3d;
@@ -409,7 +410,7 @@ $formAnimationTime: 1s;
   &.open {
     .screen {
       transform: rotateX(0deg) translateY(0);
-      animation: open $openAnimationTime 1 linear;
+      animation: open $openAnimationTime 1 ease-out;
 
       .screen-content {
         .loading-screen {
@@ -432,7 +433,7 @@ $formAnimationTime: 1s;
           .login-form {
             top: 100%;
             transform: translateX(-50%) translateY(0);
-            animation: show-login-form $formAnimationTime 1 linear;
+            animation: show-login-form $formAnimationTime 1 ease-out;
             animation-delay: $openAnimationTime + $loadingAnimationTime + $formAnimationDelay;
             animation-fill-mode: forwards;
           }
@@ -444,7 +445,7 @@ $formAnimationTime: 1s;
   &.close {
     .screen {
       transform: rotateX(-120deg) translateY(-6px);
-      animation: close $openAnimationTime 1 linear;
+      animation: close $openAnimationTime 1 ease-in;
 
       .screen-content {
         .loading-screen {
