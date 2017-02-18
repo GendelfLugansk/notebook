@@ -1,3 +1,4 @@
+//Basic styles
 @import url('https://fonts.googleapis.com/css?family=Roboto|Slabo+27px&subset=cyrillic,cyrillic-ext');
 @import "include-media";
 
@@ -23,9 +24,7 @@ body {
   height: 100%;
 }
 
-/**
- * Notebook
- */
+//Notebook
 .notebook {
   position: absolute;
   top: 50%;
@@ -83,9 +82,9 @@ body {
     .screen-back {
       position: absolute;
       top: 0;
-      bottom: 0;
       left: 0;
-      right: 0;
+      height: 100%;
+      width: 100%;
       background: #222;
       transform: rotateX(180deg);
       backface-visibility: hidden;
@@ -114,16 +113,15 @@ body {
     .screen-front {
       position: absolute;
       top: 0;
-      bottom: 0;
       left: 0;
-      right: 0;
+      height: 100%;
+      width: 100%;
       background: #059fff;
       backface-visibility: hidden;
       border: 6px solid #222;
       border-radius: 10px;
       box-sizing: border-box;
       transform-style: preserve-3d;
-      overflow: hidden;
     }
   }
 
@@ -143,11 +141,22 @@ body {
       filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#222222', endColorstr='#252525', GradientType=0); /* IE6-9 */
     }
   }
+
+  .license-and-source {
+    font-size: 0.6em;
+    line-height: 1.5em;
+    text-align: center;
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+
+    a {
+      color: #fff;
+    }
+  }
 }
 
-/**
- * Sizes
- */
+//Screen sizes and old browsers
 .old-browser {
   display: none;
   display: block \9
@@ -160,12 +169,33 @@ body {
   }
 }
 
+body {
+  @include media(">=900px", "height<600px") {
+    overflow: auto;
+  }
+
+  @include media(">=1280px", "height<800px") {
+    overflow: auto;
+  }
+}
+
 .container {
   display: none;
 
-  @include media(">=900px", "height>=600px") {
+  @include media(">=900px") {
     display: block;
   }
+
+  @include media(">=900px", "height<600px") {
+    height: auto;
+    min-height: 600px;
+  }
+
+  @include media(">=1280px", "height<800px") {
+    height: auto;
+    min-height: 800px;
+  }
+
   /**
    * Ban IE
    */
@@ -180,7 +210,7 @@ body {
   width: 900px;
   height: 600px;
 
-  @include media(">=1280px", "height>=800px") {
+  @include media(">=1280px") {
     width: 1280px;
     height: 800px;
   }
@@ -190,7 +220,7 @@ body {
     height: 310px;
     left: 175px;
 
-    @include media(">=1280px", "height>=800px") {
+    @include media(">=1280px") {
       width: 700px;
       height: 394px;
       left: 290px;
@@ -198,10 +228,10 @@ body {
   }
 
   .board {
-    top: 346px;
+    top: 326px;
 
-    @include media(">=1280px", "height>=800px") {
-      top: 438px;
+    @include media(">=1280px") {
+      top: 428px;
 
       .system {
         padding-right: 16px;
@@ -214,40 +244,40 @@ body {
   }
 
   .screen {
-    bottom: 260px;
+    bottom: 280px;
 
-    @include media(">=1280px", "height>=800px") {
-      bottom: 370px;
+    @include media(">=1280px") {
+      bottom: 380px;
     }
   }
 
   .joints {
-    top: 340px;
+    top: 320px;
     height: 6px;
 
-    @include media(">=1280px", "height>=800px") {
-      top: 430px;
+    @include media(">=1280px") {
+      top: 420px;
       height: 8px;
     }
 
     > div {
       width: 50px;
 
-      @include media(">=1280px", "height>=800px") {
+      @include media(">=1280px") {
         width: 70px;
       }
 
       &.left {
         left: 200px;
 
-        @include media(">=1280px", "height>=800px") {
+        @include media(">=1280px") {
           left: 320px;
         }
       }
       &.right {
         right: 200px;
 
-        @include media(">=1280px", "height>=800px") {
+        @include media(">=1280px") {
           right: 320px;
         }
       }
@@ -259,95 +289,108 @@ body {
   font-size: 40px;
   text-align: center;
 
-  @include media(">=900px", "height>=600px") {
+  @include media(">=900px") {
     display: none;
   }
 }
 
-/**
- * Content
- */
+//Content
 .notebook {
   .screen {
     .screen-front {
-
-      .loading-screen, .login-screen {
-        width: 100%;
-        height: 100%;
+      .screen-content {
         position: absolute;
-        left: 0;
         top: 0;
-      }
+        left: 0;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
 
-      .loading-screen {
-        background: #0079ff;
-
-        .spinner {
+        .loading-screen, .login-screen {
+          width: 100%;
+          height: 100%;
           position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translateX(-50%) translateY(-50%);
-          color: #fff;
+          left: 0;
+          top: 0;
         }
-      }
 
-      .login-screen {
-        background: #059fff;
-        color: #fff;
+        .loading-screen {
+          background: #0079ff;
+          transform-style: preserve-3d;
+          transform: translateX(-100%);
 
-        .login-form {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translateX(-50%) translateY(-50%);
-          text-align: center;
-          padding: 20px;
-          background: rgba(0, 0, 0, 0.1);
-          box-sizing: border-box;
-          width: 200px;
+          .spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            color: #fff;
 
-          .row {
-            padding-bottom: 10px;
-
-            &.lock {
-              font-size: 30px;
+            i {
+              opacity: 0;
             }
+          }
+        }
 
-            &.action {
-              padding-top: 10px;
-            }
+        .login-screen {
+          background: #059fff;
+          color: #fff;
+          transform-style: preserve-3d;
 
-            label {
-              display: block;
-              margin-bottom: 5px;
-            }
+          .login-form {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            width: 200px;
 
-            input {
-              border: none;
-              outline: none;
-              display: block;
-              width: 100%;
-              height: 20px;
-              line-height: 20px;
-              color: #000;
-              text-align: center;
-            }
+            .row {
+              padding-bottom: 10px;
 
-            button {
-              display: block;
-              width: 100%;
-              background: none;
-              border: 1px solid #fff;
-              border-radius: 3px;
-              box-shadow: none;
-              outline: none;
-              font-size: 16px;
-              font-weight: bold;
-              height: 30px;
-              line-height: 30px;
-              color: #fff;
-              padding: 0;
-              cursor: pointer;
+              &.lock {
+                font-size: 30px;
+              }
+
+              &.action {
+                padding-top: 10px;
+              }
+
+              label {
+                display: block;
+                margin-bottom: 5px;
+              }
+
+              input {
+                border: none;
+                outline: none;
+                display: block;
+                width: 100%;
+                height: 20px;
+                line-height: 20px;
+                color: #000;
+                text-align: center;
+              }
+
+              button {
+                display: block;
+                width: 100%;
+                background: none;
+                border: 1px solid #fff;
+                border-radius: 3px;
+                box-shadow: none;
+                outline: none;
+                font-size: 16px;
+                font-weight: bold;
+                height: 30px;
+                line-height: 30px;
+                color: #fff;
+                padding: 0;
+                cursor: pointer;
+              }
             }
           }
         }
@@ -356,31 +399,43 @@ body {
   }
 }
 
-/**
- * Animations
- */
-$animationTime: 4s;
+//Animations
+$openAnimationTime: 1.5s;
+$loadingAnimationTime: 2s;
+$formAnimationDelay: 500ms;
+$formAnimationTime: 1s;
 
 .notebook {
   &.open {
     .screen {
       transform: rotateX(0deg) translateY(0);
-      animation: open $animationTime 1 linear;
+      animation: open $openAnimationTime 1 linear;
 
-      .loading-screen {
-        left: -100%;
-        animation: hide-loading-screen $animationTime 1 linear;
+      .screen-content {
+        .loading-screen {
+          transform: translateX(0);
+          animation: hide-loading-screen $loadingAnimationTime 1 linear;
+          animation-delay: $openAnimationTime;
+          animation-fill-mode: forwards;
 
-        .spinner {
-          i {
-            animation: spinner $animationTime 1 linear;
+          .spinner {
+            i {
+              opacity: 0;
+              animation: spinner $loadingAnimationTime 1 linear;
+              animation-delay: $openAnimationTime;
+              animation-fill-mode: forwards;
+            }
           }
         }
-      }
 
-      .login-screen {
-        .login-form {
-          animation: login-form $animationTime 1 linear;
+        .login-screen {
+          .login-form {
+            top: 100%;
+            transform: translateX(-50%) translateY(0);
+            animation: show-login-form $formAnimationTime 1 linear;
+            animation-delay: $openAnimationTime + $loadingAnimationTime + $formAnimationDelay;
+            animation-fill-mode: forwards;
+          }
         }
       }
     }
@@ -389,59 +444,80 @@ $animationTime: 4s;
   &.close {
     .screen {
       transform: rotateX(-120deg) translateY(-6px);
-      animation: close $animationTime 1 linear;
+      animation: close $openAnimationTime 1 linear;
 
-      .loading-screen {
-        left: 0;
-        animation: show-loading-screen $animationTime 1 linear;
+      .screen-content {
+        .loading-screen {
+          animation: show-loading-screen 0.5s 1 linear;
+          animation-delay: $openAnimationTime;
+          animation-fill-mode: forwards;
+        }
+
+        .login-screen {
+          .login-form {
+            animation: hide-login-form 0.5s 1 linear;
+            animation-delay: $openAnimationTime;
+            animation-fill-mode: forwards;
+          }
+        }
       }
     }
   }
 }
 
 @keyframes open {
+  //Open notebook animation
+
   0% {
     transform: rotateX(-120deg) translateY(-6px);
   }
 
+  //This stop is needed to smoothly adjust translateY transform
+  //which should be -6px for closed notebook, but 0 for open (this requirement caused by having a joints)
   5% {
-    transform: rotateX(-100deg) translateY(0);
+    transform: rotateX(-114deg) translateY(0);
   }
 
-  30%, 100% {
+  100% {
     transform: rotateX(0deg) translateY(0);
   }
 }
 
 @keyframes hide-loading-screen {
-  0%, 60% {
-    left: 0;
+  //Hide loading screen. This animation starts on 50%, when spinner stops to spin and hides
+
+  0%, 50% {
+    transform: translateX(0);
   }
 
-  90% {
-    left: -100%;
+  100% {
+    transform: translateX(-100%);
   }
 }
 
 @keyframes spinner {
+  //Loading screen's spinner animation. It stops on 50%, after what loading screen starts to slide to the left side
+
   0% {
     transform: rotateZ(0deg);
     opacity: 1;
   }
 
-  55% {
-    transform: rotateZ(359deg);
+  45% {
+    transform: rotateZ(180deg);
     opacity: 1;
   }
 
-  60%, 100% {
-    transform: rotateZ(359deg);
+  50%, 100% {
+    transform: rotateZ(180deg);
     opacity: 0;
   }
 }
 
-@keyframes login-form {
-  0%, 90% {
+@keyframes show-login-form {
+  //Show login form animation - slide from bottom
+
+  0% {
     top: 100%;
     transform: translateX(-50%) translateY(0);
   }
@@ -453,22 +529,58 @@ $animationTime: 4s;
 }
 
 @keyframes close {
+  //Closing notebook animation
+
   0% {
     transform: rotateX(0deg);
   }
 
-  30%, 100% {
+  //This stop is needed to smoothly adjust translateY transform
+  //which should be -6px for closed notebook (this requirement caused by having a joints)
+  95% {
+    transform: rotateX(-114deg) translateY(0);
+  }
+
+  100% {
     transform: rotateX(-120deg) translateY(-6px);
   }
 }
 
 @keyframes show-loading-screen {
+  //This keyframe needed to restore "loading" screen to it's original position
+  //after notebook is closed
+
   0%, 99% {
-    left: -100%;
+    //This trick with opacity makes Safari happy, without it you'll see loading screen through display
+    //after closing notebook, for a second
+    //That's some weird bug with animation of child elements when parent is rotated or something, i don't know for sure
+    opacity: 0;
+    transform: translateX(-100%);
   }
 
   100% {
-    left: 0;
+    //Restore opacity at the end
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes hide-login-form {
+  //This keyframe needed to hide login form after notebook is closed
+
+  0%, 99% {
+    //This trick with opacity makes Safari happy, without it you'll see form through display
+    //after closing notebook, for a second
+    opacity: 0;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+
+  100% {
+    //Restore opacity at the end
+    opacity: 1;
+    top: 100%;
+    transform: translateX(-50%) translateY(0);
   }
 }
 

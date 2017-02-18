@@ -1,13 +1,13 @@
 {
   "name": "notebook",
   "version": "1.0.0",
-  "description": "CSS transforms&animation experiment",
-  "main": "index.js",
+  "description": "Notebook animation",
+  "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Gennady Dogaev",
-  "license": "ISC",
+  "license": "CC BY-NC 4.0",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
