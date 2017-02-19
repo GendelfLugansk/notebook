@@ -446,22 +446,6 @@ $formAnimationTime: 1s;
     .screen {
       transform: rotateX(-120deg) translateY(-6px);
       animation: close $openAnimationTime 1 ease-in;
-
-      .screen-content {
-        .loading-screen {
-          animation: show-loading-screen 0.5s 1 linear;
-          animation-delay: $openAnimationTime;
-          animation-fill-mode: forwards;
-        }
-
-        .login-screen {
-          .login-form {
-            animation: hide-login-form 0.5s 1 linear;
-            animation-delay: $openAnimationTime;
-            animation-fill-mode: forwards;
-          }
-        }
-      }
     }
   }
 }
@@ -497,7 +481,7 @@ $formAnimationTime: 1s;
 }
 
 @keyframes spinner {
-  //Loading screen's spinner animation. It stops on 50%, after what loading screen starts to slide to the left side
+  //Loading screen's spinner animation. It stops on 50%, after that loading screen starts to slide to the left side
 
   0% {
     transform: rotateZ(0deg);
@@ -544,44 +528,6 @@ $formAnimationTime: 1s;
 
   100% {
     transform: rotateX(-120deg) translateY(-6px);
-  }
-}
-
-@keyframes show-loading-screen {
-  //This keyframe needed to restore "loading" screen to it's original position
-  //after notebook is closed
-
-  0%, 99% {
-    //This trick with opacity makes Safari happy, without it you'll see loading screen through display
-    //after closing notebook, for a second
-    //That's some weird bug with animation of child elements when parent is rotated or something, i don't know for sure
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-
-  100% {
-    //Restore opacity at the end
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes hide-login-form {
-  //This keyframe needed to hide login form after notebook is closed
-
-  0%, 99% {
-    //This trick with opacity makes Safari happy, without it you'll see form through display
-    //after closing notebook, for a second
-    opacity: 0;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
-  }
-
-  100% {
-    //Restore opacity at the end
-    opacity: 1;
-    top: 100%;
-    transform: translateX(-50%) translateY(0);
   }
 }
 
