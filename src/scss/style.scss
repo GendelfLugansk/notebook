@@ -430,7 +430,7 @@ body {
 
 //Animations
 $openAnimationTime: 1.5s;
-$loadingAnimationTime: 2s;
+$loadingAnimationTime: 1.5s;
 $formAnimationDelay: 500ms;
 $formAnimationTime: 1s;
 
@@ -438,7 +438,7 @@ $formAnimationTime: 1s;
   &.open {
     .screen {
       transform: rotateX(0deg) translateY(0);
-      animation: open $openAnimationTime 1 ease-out;
+      animation: open $openAnimationTime 1 linear;
 
       .screen-content {
         .loading-screen {
@@ -473,7 +473,7 @@ $formAnimationTime: 1s;
   &.close {
     .screen {
       transform: rotateX(-120deg) translateY(-6px);
-      animation: close $openAnimationTime 1 ease-in;
+      animation: close $openAnimationTime 1 linear;
     }
   }
 }
@@ -487,8 +487,8 @@ $formAnimationTime: 1s;
 
   //This stop is needed to smoothly adjust translateY transform
   //which should be -6px for closed notebook, but 0 for open (this requirement caused by having a joints)
-  5% {
-    transform: rotateX(-114deg) translateY(0);
+  30% {
+    transform: rotateX(-84deg) translateY(0)
   }
 
   100% {
@@ -550,8 +550,8 @@ $formAnimationTime: 1s;
 
   //This stop is needed to smoothly adjust translateY transform
   //which should be -6px for closed notebook (this requirement caused by having a joints)
-  95% {
-    transform: rotateX(-114deg) translateY(0);
+  70% {
+    transform: rotateX(-84deg) translateY(0);
   }
 
   100% {
