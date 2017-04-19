@@ -13,7 +13,44 @@ var gulp = require('gulp'),
     order = require("gulp-order"),
     livereload = require('gulp-livereload'),
     notify = require('gulp-notify'),
-    connect = require('gulp-connect');
+    connect = require('gulp-connect'),
+    cleanCSS = require('gulp-clean-css');
+
+//vendor css
+gulp.task('vendor-css', function () {
+    gulp.src([
+        'node_modules/github-fork-ribbon-css/gh-fork-ribbon.css',
+        'node_modules/font-awesome/css/font-awesome.css'
+    ])
+        .pipe(plumber())
+        .pipe(sourcemaps.init())
+        .pipe(autoprefixer({
+            browsers: ['last 7 versions'],
+            cascade: false
+        }))
+        .pipe(cleanCSS())
+        .pipe(concat('vendor.css'))
+        .pipe(sourcemaps.write('../maps'))
+        .pipe(gulp.dest('dist/css/'))
+        .pipe(connect.reload());
+});
+
+//vendor-js
+gulp.task('vendor-js', function () {
+    gulp.src(['node_modules/jquery/dist/jquery.js'])
+        .pipe(plumber())
+        .pipe(concat('vendor.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('dist/js/'))
+        .pipe(connect.reload());
+});
+
+//vendor assets, like fonts and images
+gulp.task('vendor-assets', function () {
+    gulp.src(['node_modules/font-awesome/fonts/*.*'])
+        .pipe(gulp.dest('dist/fonts/'))
+        .pipe(connect.reload());
+});
 
 //sass
 gulp.task('sass', function () {
@@ -27,8 +64,7 @@ gulp.task('sass', function () {
         }))
         .pipe(sourcemaps.write('../maps'))
         .pipe(gulp.dest('dist/css/'))
-        .pipe(connect.reload())
-        .pipe(notify('Done!'));
+        .pipe(connect.reload());
 });
 
 //js
@@ -42,27 +78,24 @@ gulp.task('js', function () {
         .pipe(concat('all.js'))
         .pipe(uglify())
         .pipe(gulp.dest('dist/js/'))
-        .pipe(connect.reload())
-        .pipe(notify('Done!'));
+        .pipe(connect.reload());
 });
 
 // html
 gulp.task('html', function () {
     gulp.src('src/**/*.html')
         .pipe(gulp.dest('dist/'))
-        .pipe(connect.reload())
-        .pipe(notify('Done!'));
+        .pipe(connect.reload());
 });
 
+//assets, like fonts and images
 gulp.task('assets', function () {
     gulp.src('src/img/*.*')
         .pipe(gulp.dest('dist/img/'))
-        .pipe(connect.reload())
-        .pipe(notify('Images: done'));
+        .pipe(connect.reload());
     gulp.src('src/fonts/*.*')
         .pipe(gulp.dest('dist/fonts/'))
-        .pipe(connect.reload())
-        .pipe(notify('Fonts: done'));
+        .pipe(connect.reload());
 });
 
 //connect
@@ -77,13 +110,15 @@ gulp.task('connect', function () {
 
 //Watch
 gulp.task('watch', function () {
+    gulp.watch(['node_modules/**/*.js'], ['vendor-js']);
+    gulp.watch(['node_modules/**/*.css'], ['vendor-css']);
     gulp.watch(['src/scss/*.scss'], ['sass']);
     gulp.watch(['src/js/*.js'], ['js']);
     gulp.watch(['src/img/*.*', 'src/fonts/*.*'], ['assets']);
     gulp.watch(['src/*.html'], ['html']);
 });
 
-gulp.task('compile', ['sass', 'js', 'assets', 'html']);
+gulp.task('compile', ['vendor-css', 'vendor-js', 'vendor-assets', 'sass', 'js', 'assets', 'html']);
 
 //Default Task
-gulp.task('default', ['connect', 'sass', 'js', 'assets', 'html', 'watch']);
+gulp.task('default', ['vendor-css', 'vendor-js', 'vendor-assets', 'connect', 'sass', 'js', 'assets', 'html', 'watch']);

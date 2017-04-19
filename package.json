@@ -9,8 +9,11 @@
   "author": "Gennady Dogaev",
   "license": "CC BY-NC 4.0",
   "devDependencies": {
+    "font-awesome": "^4.7.0",
+    "github-fork-ribbon-css": "^0.2.1",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
+    "gulp-clean-css": "^3.0.4",
     "gulp-concat": "^2.6.1",
     "gulp-connect": "^5.0.0",
     "gulp-livereload": "^3.8.1",
@@ -19,6 +22,7 @@
     "gulp-plumber": "^1.1.0",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.4.1",
-    "gulp-uglify": "^2.0.1"
+    "gulp-uglify": "^2.0.1",
+    "jquery": "^3.2.1"
   }
 }
