@@ -19,8 +19,23 @@ body {
   position: relative;
 }
 
-.github-fork-ribbon:before {
-  background-color: #660078;
+.github-fork-ribbon {
+  &:before {
+    background-color: #660078;
+  }
+
+  /**
+   * Ban IE
+   */
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    display: none;
+  }
+  display: none \9
+;
+
+  @include media("<900px") {
+    display: none;
+  }
 }
 
 .explanation {
@@ -34,6 +49,19 @@ body {
   font-size: 32px;
   opacity: 0.3;
   color: #fff;
+
+  /**
+   * Ban IE
+   */
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    display: none;
+  }
+  display: none \9
+;
+
+  @include media("<900px") {
+    display: none;
+  }
 }
 
 .container {
@@ -177,11 +205,42 @@ body {
 
 //Screen sizes and old browsers
 .old-browser {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  max-width: 800px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 32px;
+  color: #fff;
+
+  .header, .subheader, .browser-icons a {
+    opacity: 0.3;
+  }
+
+  .subheader {
+    padding-top: 1em;
+    font-size: 0.5em;
+  }
+
+  .browser-icons {
+    padding-top: 0.5em;
+    font-size: 5em;
+
+    a, a:visited, a:active {
+      color: inherit;
+      transition: opacity 0.5s;
+    }
+
+    a:hover {
+      opacity: 0.7;
+    }
+  }
+
   display: none;
   display: block \9
 ;
-  font-size: 40px;
-  text-align: center;
 
   @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
     display: block;
@@ -315,8 +374,16 @@ body {
 }
 
 .small-device {
-  font-size: 40px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  max-width: 500px;
   text-align: center;
+  font-weight: bold;
+  font-size: 32px;
+  opacity: 0.3;
+  color: #fff;
 
   @include media(">=900px") {
     display: none;
